@@ -10,13 +10,19 @@ services:
       MYSQL_PASSWORD: change_me_db
     volumes:
       - dolibarr_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   dolibarr:
     image: dolibarr/dolibarr:latest
     container_name: dolibarr-web
     restart: unless-stopped
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     ports:
       - "8080:80"
     environment:
@@ -28,6 +34,15 @@ services:
       DOLI_ADMIN_PASSWORD: change_me_admin
       DOLI_URL_ROOT: "http://localhost:8080"
       DOLI_INSTALL_AUTO: 1
+      # Société (obligatoire pour activer les modules)
+      DOLI_COMPANY_NAME: "MonEntreprise"
+      DOLI_COMPANY_COUNTRYCODE: "FR"
+      # Modules activés à l'installation
+      DOLI_ENABLE_MODULES: "Import,Export,Societe,Product"
+      # PHP : fuseau horaire et taille max des fichiers CSV
+      PHP_INI_DATE_TIMEZONE: "Europe/Paris"
+      PHP_INI_UPLOAD_MAX_FILESIZE: "20M"
+      PHP_INI_POST_MAX_SIZE: "25M"
     volumes:
       - dolibarr_docs:/var/www/documents
       - dolibarr_custom:/var/www/html/custom
