@@ -4,12 +4,7 @@ POC de migration d'un ERP/CRM externalisé vers une instance **Dolibarr héberg�
 
 IUT Rouen – Réseaux & Télécoms – BUT3
 
-| Rôle | Nom |
-|---|---|
-| Chef de projet | _à compléter_ |
-| Membre | _à compléter_ |
 
----
 
 ## Architecture
 
