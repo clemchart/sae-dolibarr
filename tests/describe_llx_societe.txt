@@ -1,0 +1,100 @@
+Field	Type	Null	Key	Default	Extra
+rowid	int(11)	NO	PRI	NULL	auto_increment
+nom	varchar(128)	YES	MUL	NULL	
+name_alias	varchar(128)	YES		NULL	
+entity	int(11)	NO		1	
+ref_ext	varchar(255)	YES		NULL	
+statut	tinyint(4)	YES		0	
+parent	int(11)	YES		NULL	
+status	tinyint(4)	YES		1	
+code_client	varchar(24)	YES	MUL	NULL	
+code_fournisseur	varchar(24)	YES	MUL	NULL	
+tp_payment_reference	varchar(25)	YES		NULL	
+accountancy_code_customer_general	varchar(32)	YES		NULL	
+code_compta	varchar(32)	YES		NULL	
+accountancy_code_supplier_general	varchar(32)	YES		NULL	
+code_compta_fournisseur	varchar(32)	YES		NULL	
+address	varchar(255)	YES		NULL	
+zip	varchar(25)	YES		NULL	
+town	varchar(50)	YES		NULL	
+fk_departement	int(11)	YES		0	
+fk_pays	int(11)	YES	MUL	0	
+geolat	double(24,8)	YES		NULL	
+geolong	double(24,8)	YES		NULL	
+geopoint	point	YES		NULL	
+georesultcode	varchar(16)	YES		NULL	
+phone	varchar(30)	YES		NULL	
+phone_mobile	varchar(30)	YES		NULL	
+fax	varchar(30)	YES		NULL	
+url	varchar(255)	YES		NULL	
+email	varchar(128)	YES		NULL	
+fk_account	int(11)	YES	MUL	0	
+socialnetworks	text	YES		NULL	
+fk_effectif	int(11)	YES		0	
+fk_typent	int(11)	YES	MUL	NULL	
+fk_forme_juridique	int(11)	YES	MUL	0	
+birth	date	YES		NULL	
+fk_currency	varchar(3)	YES		NULL	
+siren	varchar(128)	YES		NULL	
+siret	varchar(128)	YES		NULL	
+ape	varchar(128)	YES		NULL	
+idprof4	varchar(128)	YES		NULL	
+idprof5	varchar(128)	YES		NULL	
+idprof6	varchar(128)	YES		NULL	
+tva_intra	varchar(20)	YES		NULL	
+capital	double(24,8)	YES		NULL	
+fk_stcomm	int(11)	NO	MUL	0	
+note_private	text	YES		NULL	
+note_public	text	YES		NULL	
+model_pdf	varchar(255)	YES		NULL	
+last_main_doc	varchar(255)	YES		NULL	
+prefix_comm	varchar(5)	YES	MUL	NULL	
+client	tinyint(4)	YES		0	
+fournisseur	tinyint(4)	YES		0	
+supplier_account	varchar(32)	YES		NULL	
+fk_prospectlevel	varchar(12)	YES	MUL	NULL	
+fk_incoterms	int(11)	YES		NULL	
+location_incoterms	varchar(255)	YES		NULL	
+customer_bad	tinyint(4)	YES		0	
+customer_rate	double	YES		0	
+supplier_rate	double	YES		0	
+remise_client	double	YES		0	
+remise_supplier	double	YES		0	
+mode_reglement	int(11)	YES		NULL	
+cond_reglement	tinyint(4)	YES		NULL	
+deposit_percent	varchar(63)	YES		NULL	
+transport_mode	tinyint(4)	YES		NULL	
+mode_reglement_supplier	tinyint(4)	YES		NULL	
+cond_reglement_supplier	tinyint(4)	YES		NULL	
+transport_mode_supplier	tinyint(4)	YES		NULL	
+fk_shipping_method	int(11)	YES	MUL	NULL	
+tva_assuj	tinyint(4)	YES		1	
+vatexemptcode	varchar(24)	YES		NULL	
+vat_reverse_charge	tinyint(4)	YES		0	
+localtax1_assuj	tinyint(4)	YES		0	
+localtax1_value	double(7,4)	YES		NULL	
+localtax2_assuj	tinyint(4)	YES		0	
+localtax2_value	double(7,4)	YES		NULL	
+barcode	varchar(180)	YES	MUL	NULL	
+fk_barcode_type	int(11)	YES		0	
+price_level	int(11)	YES		NULL	
+outstanding_limit	double(24,8)	YES		NULL	
+order_min_amount	double(24,8)	YES		NULL	
+supplier_order_min_amount	double(24,8)	YES		NULL	
+default_lang	varchar(6)	YES		NULL	
+logo	varchar(255)	YES		NULL	
+logo_squarred	varchar(255)	YES		NULL	
+canvas	varchar(32)	YES		NULL	
+fk_warehouse	int(11)	YES		NULL	
+webservices_url	varchar(255)	YES		NULL	
+webservices_key	varchar(128)	YES		NULL	
+accountancy_code_sell	varchar(32)	YES		NULL	
+accountancy_code_buy	varchar(32)	YES		NULL	
+datec	datetime	YES		NULL	
+tms	timestamp	YES		current_timestamp()	on update current_timestamp()
+fk_user_creat	int(11)	YES	MUL	NULL	
+fk_user_modif	int(11)	YES	MUL	NULL	
+fk_multicurrency	int(11)	YES		NULL	
+multicurrency_code	varchar(3)	YES		NULL	
+ip	varchar(250)	YES		NULL	
+import_key	varchar(14)	YES		NULL	

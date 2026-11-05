@@ -29,7 +29,7 @@ DB_NAME="${DB_NAME:-dolibarr}"
 DB_ENTITY="${DB_ENTITY:-1}"
 MYSQL_CMD="${MYSQL_CMD:-sudo mariadb}"
 EXPECTED_HEADER="nom;client;fournisseur;code_client;code_fournisseur;address;zip;town;country_code;phone;email;status"
-IMPORT_KEY="csv$(date +%Y%m%d%H%M)"   # 14 caractères max : permet de retrouver ce lot d'import
+IMPORT_KEY="csv$(date +%y%m%d%H%M)"   # 14 caractères max : permet de retrouver ce lot d'import
 
 info()  { echo -e "\e[34m[INFO]\e[0m  $*"; }
 ok()    { echo -e "\e[32m[OK]\e[0m    $*"; }
@@ -54,6 +54,9 @@ $MYSQL_CMD "$DB_NAME" -e "SELECT 1 FROM llx_societe LIMIT 1;" >/dev/null 2>&1 \
 avant=$($MYSQL_CMD "$DB_NAME" -N -e "SELECT COUNT(*) FROM llx_societe WHERE entity=$DB_ENTITY;")
 info "Tiers déjà présents dans Dolibarr : $avant"
 
+# même collation que llx_societe, sinon MariaDB refuse de comparer les noms (erreur 1267)
+COLLATION=$($MYSQL_CMD "$DB_NAME" -N -e "SELECT TABLE_COLLATION FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='llx_societe';")
+
 # --- 2. Import ------------------------------------------------------------------
 # Le CSV est envoyé sur l'entrée standard (/dev/stdin) : ça marche pareil en local
 # et avec "docker exec -i", sans copier le fichier dans le conteneur.
@@ -71,7 +74,7 @@ CREATE TEMPORARY TABLE tmp_tiers (
   phone            VARCHAR(20),
   email            VARCHAR(128),
   status           VARCHAR(4)
-) DEFAULT CHARSET=utf8mb4;
+) DEFAULT CHARSET=utf8mb4 COLLATE=$COLLATION;
 
 LOAD DATA LOCAL INFILE '/dev/stdin'
   INTO TABLE tmp_tiers

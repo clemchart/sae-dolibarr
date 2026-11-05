@@ -1,31 +1,31 @@
-nom;client;fournisseur;code_client;code_fournisseur;address;zip;town;country_code;phone;email
-Atelier Normand Bois;1;0;CU0001;;32 rue du Général Leclerc;76200;Dieppe;FR;02 35 80 42 60;contact@atelier1.fr
-Boulangerie Le Fournil;1;1;CU0002;SU0001;94 rue de la République;76300;Sotteville-lès-Rouen;FR;02 35 85 94 56;contact@boulangerie2.fr
-Cabinet Leroux Conseil;0;1;;SU0002;52 rue Jeanne d'Arc;76100;Rouen;FR;02 35 24 13 78;contact@cabinet3.fr
-Distrib'Ouest;1;0;CU0003;;62 boulevard de Strasbourg;76000;Rouen;FR;02 35 54 88 48;contact@distribouest4.fr
-Électricité Martin & Fils;1;0;CU0004;;101 rue du Général Leclerc;76300;Sotteville-lès-Rouen;FR;02 35 13 66 31;contact@lectricit5.fr
-Ferme des Trois Chênes;0;1;;SU0003;117 rue Jeanne d'Arc;76000;Rouen;FR;02 35 23 85 23;contact@ferme6.fr
-Garage Seine Auto;1;0;CU0005;;120 rue Jeanne d'Arc;76300;Sotteville-lès-Rouen;FR;02 35 97 65 63;contact@garage7.fr
-Hôtel du Vieux Port;1;0;CU0006;;15 rue des Carmes;27000;Évreux;FR;02 35 80 32 85;contact@htel8.fr
-Imprimerie Caux Print;1;0;CU0007;;64 avenue de Bretagne;76300;Sotteville-lès-Rouen;FR;02 35 76 66 93;contact@imprimerie9.fr
-Jardins de Rouen;1;0;CU0008;;107 rue Jeanne d'Arc;76400;Fécamp;FR;02 35 70 75 92;contact@jardins10.fr
-Kiné Santé Plus;1;1;CU0009;SU0004;68 quai de Paris;76600;Le Havre;FR;02 35 78 68 97;contact@kin11.fr
-Librairie La Page;1;0;CU0010;;54 avenue de Bretagne;27000;Évreux;FR;02 35 84 84 62;contact@librairie12.fr
-Menuiserie Duval;1;1;CU0011;SU0005;29 rue des Carmes;76100;Rouen;FR;02 35 85 71 37;contact@menuiserie13.fr
-Nord Logistique;1;1;CU0012;SU0006;42 rue des Carmes;76000;Rouen;FR;02 35 49 78 95;contact@nord14.fr
-Optique Vision 76;1;1;CU0013;SU0007;26 rue de la République;76300;Sotteville-lès-Rouen;FR;02 35 47 42 71;contact@optique15.fr
-Plomberie Express;1;0;CU0014;;114 boulevard de Strasbourg;76400;Fécamp;FR;02 35 24 48 69;contact@plomberie16.fr
-Quincaillerie Centrale;1;0;CU0015;;87 place du Vieux Marché;76200;Dieppe;FR;02 35 19 81 74;contact@quincaillerie17.fr
-Restaurant L'Étable;1;1;CU0016;SU0008;75 rue des Carmes;76100;Rouen;FR;02 35 67 71 58;contact@restaurant18.fr
-Société Havraise de Transport;1;0;CU0017;;18 place du Vieux Marché;76100;Rouen;FR;02 35 61 91 59;contact@socit19.fr
-Textiles Normandie;1;0;CU0018;;52 rue de la République;27000;Évreux;FR;02 35 80 68 62;contact@textiles20.fr
-Univers Bureau;1;1;CU0019;SU0009;62 avenue de Bretagne;27000;Évreux;FR;02 35 10 26 60;contact@univers21.fr
-Vins & Terroirs;1;0;CU0020;;34 rue Jeanne d'Arc;76400;Fécamp;FR;02 35 60 81 52;contact@vins22.fr
-Web Agence Lumière;1;0;CU0021;;5 rue de la République;76100;Rouen;FR;02 35 10 47 67;contact@web23.fr
-Xpert Informatique;1;0;CU0022;;94 boulevard de Strasbourg;76300;Sotteville-lès-Rouen;FR;02 35 54 45 20;contact@xpert24.fr
-Yvetot Matériaux;0;1;;SU0010;31 place du Vieux Marché;76000;Rouen;FR;02 35 33 23 82;contact@yvetot25.fr
-Zénith Nettoyage;1;0;CU0023;;111 rue des Carmes;76200;Dieppe;FR;02 35 91 27 29;contact@znith26.fr
-Agri Pièces Pro;1;1;CU0024;SU0011;54 rue du Général Leclerc;76400;Fécamp;FR;02 35 72 16 68;contact@agri27.fr
-Bâti Concept;0;1;;SU0012;10 rue Jeanne d'Arc;76400;Fécamp;FR;02 35 25 47 74;contact@bti28.fr
-Café des Arts;1;0;CU0025;;110 boulevard de Strasbourg;76190;Yvetot;FR;02 35 93 18 87;contact@caf29.fr
-Domotique Services;1;1;CU0026;SU0013;98 rue des Carmes;76190;Yvetot;FR;02 35 55 38 72;contact@domotique30.fr
+nom;client;fournisseur;code_client;code_fournisseur;address;zip;town;country_code;phone;email;status
+Atelier Normand Bois;1;0;CU0001;;32 rue du Général Leclerc;76200;Dieppe;FR;02 35 80 42 60;contact@atelier1.fr;1
+Boulangerie Le Fournil;1;1;CU0002;SU0001;94 rue de la République;76300;Sotteville-lès-Rouen;FR;02 35 85 94 56;contact@boulangerie2.fr;1
+Cabinet Leroux Conseil;0;1;;SU0002;52 rue Jeanne d'Arc;76100;Rouen;FR;02 35 24 13 78;contact@cabinet3.fr;1
+Distrib'Ouest;1;0;CU0003;;62 boulevard de Strasbourg;76000;Rouen;FR;02 35 54 88 48;contact@distribouest4.fr;1
+Électricité Martin & Fils;1;0;CU0004;;101 rue du Général Leclerc;76300;Sotteville-lès-Rouen;FR;02 35 13 66 31;contact@lectricit5.fr;1
+Ferme des Trois Chênes;0;1;;SU0003;117 rue Jeanne d'Arc;76000;Rouen;FR;02 35 23 85 23;contact@ferme6.fr;1
+Garage Seine Auto;1;0;CU0005;;120 rue Jeanne d'Arc;76300;Sotteville-lès-Rouen;FR;02 35 97 65 63;contact@garage7.fr;1
+Hôtel du Vieux Port;1;0;CU0006;;15 rue des Carmes;27000;Évreux;FR;02 35 80 32 85;contact@htel8.fr;1
+Imprimerie Caux Print;1;0;CU0007;;64 avenue de Bretagne;76300;Sotteville-lès-Rouen;FR;02 35 76 66 93;contact@imprimerie9.fr;1
+Jardins de Rouen;1;0;CU0008;;107 rue Jeanne d'Arc;76400;Fécamp;FR;02 35 70 75 92;contact@jardins10.fr;1
+Kiné Santé Plus;1;1;CU0009;SU0004;68 quai de Paris;76600;Le Havre;FR;02 35 78 68 97;contact@kin11.fr;1
+Librairie La Page;1;0;CU0010;;54 avenue de Bretagne;27000;Évreux;FR;02 35 84 84 62;contact@librairie12.fr;1
+Menuiserie Duval;1;1;CU0011;SU0005;29 rue des Carmes;76100;Rouen;FR;02 35 85 71 37;contact@menuiserie13.fr;1
+Nord Logistique;1;1;CU0012;SU0006;42 rue des Carmes;76000;Rouen;FR;02 35 49 78 95;contact@nord14.fr;1
+Optique Vision 76;1;1;CU0013;SU0007;26 rue de la République;76300;Sotteville-lès-Rouen;FR;02 35 47 42 71;contact@optique15.fr;1
+Plomberie Express;1;0;CU0014;;114 boulevard de Strasbourg;76400;Fécamp;FR;02 35 24 48 69;contact@plomberie16.fr;1
+Quincaillerie Centrale;1;0;CU0015;;87 place du Vieux Marché;76200;Dieppe;FR;02 35 19 81 74;contact@quincaillerie17.fr;1
+Restaurant L'Étable;1;1;CU0016;SU0008;75 rue des Carmes;76100;Rouen;FR;02 35 67 71 58;contact@restaurant18.fr;1
+Société Havraise de Transport;1;0;CU0017;;18 place du Vieux Marché;76100;Rouen;FR;02 35 61 91 59;contact@socit19.fr;1
+Textiles Normandie;1;0;CU0018;;52 rue de la République;27000;Évreux;FR;02 35 80 68 62;contact@textiles20.fr;1
+Univers Bureau;1;1;CU0019;SU0009;62 avenue de Bretagne;27000;Évreux;FR;02 35 10 26 60;contact@univers21.fr;1
+Vins & Terroirs;1;0;CU0020;;34 rue Jeanne d'Arc;76400;Fécamp;FR;02 35 60 81 52;contact@vins22.fr;1
+Web Agence Lumière;1;0;CU0021;;5 rue de la République;76100;Rouen;FR;02 35 10 47 67;contact@web23.fr;1
+Xpert Informatique;1;0;CU0022;;94 boulevard de Strasbourg;76300;Sotteville-lès-Rouen;FR;02 35 54 45 20;contact@xpert24.fr;1
+Yvetot Matériaux;0;1;;SU0010;31 place du Vieux Marché;76000;Rouen;FR;02 35 33 23 82;contact@yvetot25.fr;1
+Zénith Nettoyage;1;0;CU0023;;111 rue des Carmes;76200;Dieppe;FR;02 35 91 27 29;contact@znith26.fr;1
+Agri Pièces Pro;1;1;CU0024;SU0011;54 rue du Général Leclerc;76400;Fécamp;FR;02 35 72 16 68;contact@agri27.fr;1
+Bâti Concept;0;1;;SU0012;10 rue Jeanne d'Arc;76400;Fécamp;FR;02 35 25 47 74;contact@bti28.fr;1
+Café des Arts;1;0;CU0025;;110 boulevard de Strasbourg;76190;Yvetot;FR;02 35 93 18 87;contact@caf29.fr;1
+Domotique Services;1;1;CU0026;SU0013;98 rue des Carmes;76190;Yvetot;FR;02 35 55 38 72;contact@domotique30.fr;1
