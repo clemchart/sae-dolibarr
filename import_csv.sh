@@ -1,23 +1,28 @@
 #!/bin/bash
-# Import des tiers (CSV ;) dans llx_societe. À lancer depuis la racine du dépôt.
-FICHIER="${1:-data/tiers.csv}"
-BASE="dolibarr"
-SQL="sudo mariadb"
+# Import des tiers (CSV ;) dans le Dolibarr dockerisé.
+# data/ est monté en lecture seule dans le conteneur db sous /data (voir docker-compose.yml).
+cd "$(dirname "$0")"
+source .env
+FICHIER="${1:-tiers.csv}"
+SQL="docker exec -i -e MYSQL_PWD=$DB_ROOT_PASSWORD dolibarr-db mariadb --local-infile=1 -uroot $DB_NAME"
 
-[ -f "$FICHIER" ] || { echo "Fichier introuvable : $FICHIER"; exit 1; }
+[ -f "data/$FICHIER" ] || { echo "Fichier introuvable : data/$FICHIER"; exit 1; }
 
-AVANT=$($SQL $BASE -N -e "SELECT COUNT(*) FROM llx_societe;")
+# La table temporaire doit avoir la même collation que llx_societe (sinon erreur 1267)
+COLL=$($SQL -N -e "SELECT TABLE_COLLATION FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='llx_societe'")
+[ -n "$COLL" ] || { echo "Table llx_societe absente : lancer d'abord ./install.sh"; exit 1; }
 
-# Collation imposée : celle des tables Dolibarr (sinon erreur 1267 sur la comparaison des noms)
-$SQL --local-infile=1 $BASE <<FIN || { echo "Échec de l'import"; exit 1; }
+AVANT=$($SQL -N -e "SELECT COUNT(*) FROM llx_societe")
+
+$SQL <<FIN || { echo "Échec de l'import"; exit 1; }
 CREATE TEMPORARY TABLE tmp_tiers (
     nom VARCHAR(128), client INT, fournisseur INT,
     code_client VARCHAR(24), code_fournisseur VARCHAR(24),
     address VARCHAR(255), zip VARCHAR(25), town VARCHAR(50),
     country_code VARCHAR(3), phone VARCHAR(20), email VARCHAR(128), status INT
-) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) DEFAULT CHARSET=utf8mb4 COLLATE=$COLL;
 
-LOAD DATA LOCAL INFILE '$FICHIER' INTO TABLE tmp_tiers
+LOAD DATA LOCAL INFILE '/data/$FICHIER' INTO TABLE tmp_tiers
     CHARACTER SET utf8mb4 FIELDS TERMINATED BY ';' IGNORE 1 LINES;
 
 -- Codes vides -> NULL (index uniques), pays converti en fk_pays, doublons ignorés sur le nom
@@ -33,5 +38,5 @@ FROM tmp_tiers t
 WHERE t.nom NOT IN (SELECT nom FROM llx_societe WHERE nom IS NOT NULL);
 FIN
 
-APRES=$($SQL $BASE -N -e "SELECT COUNT(*) FROM llx_societe;")
+APRES=$($SQL -N -e "SELECT COUNT(*) FROM llx_societe")
 echo "$((APRES - AVANT)) tiers ajoutés ($APRES au total)"

@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: dolibarr-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./data:/data:ro            # CSV lisibles par LOAD DATA (import_csv.sh)
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 30
+
+  dolibarr:
+    image: dolibarr/dolibarr:${DOLI_VERSION}
+    container_name: dolibarr-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy   # Dolibarr attend que la base soit prête
+    environment:
+      DOLI_DB_HOST: db
+      DOLI_DB_NAME: ${DB_NAME}
+      DOLI_DB_USER: ${DB_USER}
+      DOLI_DB_PASSWORD: ${DB_PASSWORD}
+      DOLI_ADMIN_LOGIN: ${DOLI_ADMIN_LOGIN}
+      DOLI_ADMIN_PASSWORD: ${DOLI_ADMIN_PASSWORD}
+      DOLI_ENABLE_MODULES: Societe,Fournisseur
+    ports:
+      - "${DOLI_PORT}:80"
+    volumes:
+      - doli_documents:/var/www/documents
+
+volumes:
+  db_data:
+  doli_documents:
