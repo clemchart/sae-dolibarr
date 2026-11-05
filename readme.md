@@ -2,7 +2,7 @@
 
 POC de migration d'un ERP/CRM externalisé vers une instance **Dolibarr hébergée en interne**, entièrement **dockerisée**, avec **import automatisé** des tiers (clients/fournisseurs) depuis des fichiers CSV et **sauvegarde/restauration** pour un PRA.
 
-IUT Rouen – Réseaux & Télécoms – BUT3 · Équipe : Clément XXX (chef de projet), Mathis XXX
+IUT Rouen – Réseaux & Télécoms – BUT3 · Équipe : Clément, Mathis 
 
 ---
 
