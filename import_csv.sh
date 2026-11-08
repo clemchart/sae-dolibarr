@@ -1,19 +1,19 @@
 #!/bin/bash
-# Import des tiers (CSV ;) dans le Dolibarr dockerisé.
-# data/ est monté en lecture seule dans le conteneur db sous /data (voir docker-compose.yml).
+# Importe les tiers d'un fichier CSV (data/tiers.csv par défaut) dans Dolibarr
 cd "$(dirname "$0")"
 source .env
 FICHIER="${1:-tiers.csv}"
 SQL="docker exec -i -e MYSQL_PWD=$DB_ROOT_PASSWORD dolibarr-db mariadb --local-infile=1 -uroot $DB_NAME"
 
+# 1) Vérifie que le fichier et la base existent
 [ -f "data/$FICHIER" ] || { echo "Fichier introuvable : data/$FICHIER"; exit 1; }
-
-# La table temporaire doit avoir la même collation que llx_societe (sinon erreur 1267)
 COLL=$($SQL -N -e "SELECT TABLE_COLLATION FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='llx_societe'")
-[ -n "$COLL" ] || { echo "Table llx_societe absente : lancer d'abord ./install.sh"; exit 1; }
-
+[ -n "$COLL" ] || { echo "Dolibarr n'est pas installé : lance d'abord ./install.sh"; exit 1; }
+echo "1) Fichier data/$FICHIER trouvé."
 AVANT=$($SQL -N -e "SELECT COUNT(*) FROM llx_societe")
 
+# 2) Charge le CSV dans une table temporaire, puis copie les nouveaux tiers dans llx_societe
+echo "2) Import en cours..."
 $SQL <<FIN || { echo "Échec de l'import"; exit 1; }
 CREATE TEMPORARY TABLE tmp_tiers (
     nom VARCHAR(128), client INT, fournisseur INT,
@@ -25,7 +25,7 @@ CREATE TEMPORARY TABLE tmp_tiers (
 LOAD DATA LOCAL INFILE '/data/$FICHIER' INTO TABLE tmp_tiers
     CHARACTER SET utf8mb4 FIELDS TERMINATED BY ';' IGNORE 1 LINES;
 
--- Codes vides -> NULL (index uniques), pays converti en fk_pays, doublons ignorés sur le nom
+-- codes vides -> NULL, code pays -> id pays, tiers déjà présents ignorés
 INSERT INTO llx_societe
     (nom, entity, client, fournisseur, code_client, code_fournisseur,
      address, zip, town, fk_pays, phone, email, status, datec)
@@ -38,5 +38,6 @@ FROM tmp_tiers t
 WHERE t.nom NOT IN (SELECT nom FROM llx_societe WHERE nom IS NOT NULL);
 FIN
 
+# 3) Affiche le résultat
 APRES=$($SQL -N -e "SELECT COUNT(*) FROM llx_societe")
-echo "$((APRES - AVANT)) tiers ajoutés ($APRES au total)"
+echo "3) $((APRES - AVANT)) tiers ajoutés ($APRES au total)"

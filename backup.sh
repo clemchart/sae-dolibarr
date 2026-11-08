@@ -1,20 +1,23 @@
 #!/bin/bash
-# Sauvegarde complète : base, documents et conf.php dans backups/AAAAMMJJ-HHMMSS/
+# Sauvegarde la base, les documents et conf.php dans backups/AAAAMMJJ-HHMMSS/
 cd "$(dirname "$0")"
 source .env
 DEST="backups/$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$DEST"
 
-# --single-transaction : dump cohérent sans bloquer Dolibarr (InnoDB)
+# 1) Sauvegarde la base (sans bloquer Dolibarr)
+echo "1) Sauvegarde de la base..."
 docker exec -e MYSQL_PWD="$DB_ROOT_PASSWORD" dolibarr-db \
     mariadb-dump -uroot --single-transaction --routines "$DB_NAME" > "$DEST/dolibarr.sql" \
-    || { echo "Échec du dump de la base"; rm -rf "$DEST"; exit 1; }
+    || { echo "Échec de la sauvegarde de la base"; rm -rf "$DEST"; exit 1; }
 
-# documents/ contient les fichiers joints et install.lock
+# 2) Sauvegarde les documents (fichiers joints, install.lock)
+echo "2) Sauvegarde des documents..."
 docker exec dolibarr-app tar czf - -C /var/www documents > "$DEST/documents.tar.gz" \
     || { echo "Échec de la sauvegarde des documents"; exit 1; }
 
-# conf.php contient l'identifiant unique de l'instance (utilisé pour le chiffrement)
+# 3) Sauvegarde conf.php (contient la clé unique de l'instance)
+echo "3) Sauvegarde de la configuration..."
 docker cp dolibarr-app:/var/www/html/conf/conf.php "$DEST/conf.php"
 
 echo "Sauvegarde OK : $DEST ($(du -sh "$DEST" | cut -f1))"
