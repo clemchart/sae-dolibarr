@@ -58,7 +58,9 @@ sae-dolibarr/
 
 ## Installation sur une machine vierge
 
-### 1. Installer Docker (si absent)
+### 1. Docker (installé automatiquement si absent)
+
+`install.sh` vérifie au démarrage que Docker et Docker Compose sont présents. S'ils manquent, il les installe lui-même (Debian ou Ubuntu) en se relançant avec `sudo`. Installation manuelle si on préfère :
 
 ```bash
 sudo apt update && sudo apt install -y ca-certificates curl git
@@ -105,7 +107,7 @@ DOLI_ADMIN_PASSWORD='...'
 ./install.sh
 ```
 
-Le script vérifie Docker, lance les conteneurs, attend la fin de l'installation de Dolibarr puis affiche l'adresse d'accès.
+Le script vérifie Docker (et l'installe si besoin), lance les conteneurs, attend la fin de l'installation de Dolibarr puis affiche l'adresse d'accès.
 
 Accès : `http://<IP-du-serveur>:8080` avec le compte `DOLI_ADMIN_LOGIN` / `DOLI_ADMIN_PASSWORD` du `.env`.
 
