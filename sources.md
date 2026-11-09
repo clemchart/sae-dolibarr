@@ -20,6 +20,3 @@
 ## Base de données
 - [MariaDB : LOAD DATA INFILE](https://mariadb.com/kb/en/load-data-infile/) : import des CSV
 - [MariaDB : mariadb-dump](https://mariadb.com/kb/en/mariadb-dump/) : sauvegarde
-
-## Autres
-- (ajouter ici chaque page utile, avec une phrase pour dire à quoi elle a servi)
